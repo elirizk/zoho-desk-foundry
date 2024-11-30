@@ -1,0 +1,12 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "properties": {
+        "incident_name": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "incident_name"
+    ],
+    "type": "object"
+}

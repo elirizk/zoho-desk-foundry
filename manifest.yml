@@ -1,0 +1,99 @@
+app_id: e81ba2058e334b84abfd7b329cc5ec78
+name: Zoho Desk
+description: Integration and helpful functionalities for Zoho Desk API
+logo: ""
+manifest_version: "2023-05-09"
+ignored: []
+ui:
+    homepage: ""
+    extensions: []
+    pages: {}
+    dashboards: {}
+    navigation: {}
+api_integrations:
+    - id: b40ad9e2b77a40538d12878b574cf5bf
+      name: Zoho Desk
+      description: ""
+      path: api-integrations/Zoho_Desk.json
+rtr_scripts: []
+collections: []
+auth:
+    scopes: []
+    permissions: {}
+    roles: []
+functions:
+    - id: e6a968c06b244972b0a55e8c87e150a0
+      name: ZohoAuth
+      config: null
+      description: Obtain access code from Zoho Desk OAuth2
+      path: functions/ZohoAuth
+      environment_variables:
+        AuthorizeURL: https://accounts.zoho.com/oauth/v2/auth
+        BaseURL: https://desk.zoho.com/api/v1
+        CallbackURL: YOUR_CALLBACK_URL
+        ClientID: YOUR_CLIENT_ID
+        ClientSecret: YOUR_CLIENT_SECRET
+        Scope: Desk.tickets.ALL,Desk.contacts.READ,Desk.settings.READ
+        TokenURL: https://accounts.zoho.com/oauth/v2/token
+      handlers:
+        - name: get_access_code
+          description: Obtain access code from Zoho Desk OAuth2
+          method: POST
+          api_path: /auth
+          request_schema: schemas/zoho_auth_request.json
+          response_schema: schemas/zoho_auth_response.json
+          workflow_integration:
+            id: f25351cb6ef44c8b9d6b0fcd38f968cf
+            disruptive: false
+            system_action: false
+            tags: []
+          permissions: []
+      language: python
+    - id: f3f3f50015b54a14936acf4a42f2bfcb
+      name: DataProcessing
+      config: null
+      description: Transforms data fields and processes data
+      path: functions/DataProcessing
+      environment_variables: {}
+      handlers:
+        - name: get_priority
+          description: Return Zoho priority from CrowdStrike severity
+          method: POST
+          api_path: /priority
+          request_schema: schemas/priority_request.json
+          response_schema: schemas/priority_response.json
+          workflow_integration:
+            id: f3063343616b43b1bd452a4288c6814a
+            disruptive: false
+            system_action: false
+            tags: []
+          permissions: []
+        - name: get_sensor_tags
+          description: Return cleaned sensor tags
+          method: POST
+          api_path: /sensor_tags
+          request_schema: schemas/sensor_tags_request.json
+          response_schema: schemas/sensor_tags_response.json
+          workflow_integration:
+            id: 4abd347606604c64a20e72ba371dd481
+            disruptive: false
+            system_action: false
+            tags: []
+          permissions: []
+        - name: get_incident_name
+          description: Return formatted incident name
+          method: POST
+          api_path: /incident_name
+          request_schema: schemas/incident_name_request.json
+          response_schema: schemas/incident_name_response.json
+          workflow_integration:
+            id: 4abd347606604c64a20e72ba371dd482
+            disruptive: false
+            system_action: false
+            tags: []
+      language: python
+workflows: []
+parsers: []
+logscale:
+    saved_searches: []
+lookup_files: []

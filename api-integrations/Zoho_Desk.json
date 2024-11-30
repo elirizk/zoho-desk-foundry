@@ -1,0 +1,163 @@
+{
+  "components": {},
+  "info": {
+    "contact": {
+      "email": "eli.rizk01@gmail.com"
+    },
+    "title": "Zoho Desk",
+    "version": ""
+  },
+  "openapi": "3.0.3",
+  "paths": {
+    "/api/v1/tickets": {
+      "post": {
+        "description": "Creates a ticket in Zoho Desk",
+        "operationId": "Create Zoho Ticket",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "assigneeId": {
+                    "title": "AssigneeId",
+                    "type": "string"
+                  },
+                  "contactId": {
+                    "title": "ContactId",
+                    "type": "string"
+                  },
+                  "departmentId": {
+                    "title": "DepartmentId",
+                    "type": "string"
+                  },
+                  "description": {
+                    "title": "Description",
+                    "type": "string"
+                  },
+                  "priority": {
+                    "title": "Priority",
+                    "type": "string"
+                  },
+                  "subject": {
+                    "title": "Subject",
+                    "type": "string"
+                  },
+                  "teamId": {
+                    "title": "TeamId",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "contactId",
+                  "subject",
+                  "departmentId"
+                ],
+                "title": "Json",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "x-cs-operation-config": {
+          "workflow": {
+            "description": "Creates a ticket in Zoho Desk",
+            "expose_to_workflow": true,
+            "name": "Create Zoho Ticket",
+            "system": false,
+            "tags": [
+              "Zoho Desk"
+            ]
+          }
+        }
+      }
+    },
+    "/api/v1/tickets/{ticket_id}/associateTag": {
+      "post": {
+        "description": "Associates a list of tags to a Zoho ticket",
+        "operationId": "Associate Tag to Zoho Ticket",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "ticket_id",
+            "required": true,
+            "schema": {
+              "title": "Ticket Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "tags": {
+                    "items": {
+                      "title": "Tags",
+                      "type": "string"
+                    },
+                    "type": "array"
+                  }
+                },
+                "title": "Json",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": null,
+        "x-cs-operation-config": {
+          "workflow": {
+            "description": "Associates a list of tags to a Zoho ticket",
+            "expose_to_workflow": true,
+            "name": "Associate Tag to Zoho Ticket",
+            "system": false,
+            "tags": [
+              "Zoho Desk"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://desk.zoho.com"
+    }
+  ],
+  "x-cs-multi-instance": true
+}
